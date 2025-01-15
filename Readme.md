@@ -33,7 +33,7 @@ Ce projet met en place deux environnements PHP distincts sous Docker, permettant
 
 ## Structure du Projet
 
-\```
+```
 .
 ├── docker-compose.yml
 ├── nginx/
@@ -47,22 +47,22 @@ Ce projet met en place deux environnements PHP distincts sous Docker, permettant
     │   └── index.php
     └── projet2/           # Application PHP 8.1
         └── index.php
-\```
+```
 
 ## Prérequis - Installation de Docker
 
 ### Sous Windows
 1. Installer WSL2 (Windows Subsystem for Linux)
-\```bash
+```bash
 wsl --install
-\```
+```
 
 2. Télécharger et installer Docker Desktop depuis [le site officiel](https://www.docker.com/products/docker-desktop)
 3. Lancer Docker Desktop et s'assurer qu'il utilise WSL2
 
 ### Sous Linux (Ubuntu/Debian)
 1. Installer Docker
-\```bash
+```bash
 # Mettre à jour le système
 sudo apt-get update
 
@@ -86,22 +86,22 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # Ajouter l'utilisateur au groupe docker
 sudo usermod -aG docker $USER
-\```
+```
 
 2. Installer Docker Compose
-\```bash
+```bash
 # Télécharger la dernière version de Docker Compose
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 # Rendre le binaire exécutable
 sudo chmod +x /usr/local/bin/docker-compose
-\```
+```
 
 ## Utilisation avec Makefile
 
 Le Makefile inclut les commandes suivantes :
 
-\```bash
+```bash
 # Démarrer tous les services
 make up
 
@@ -125,7 +125,7 @@ make shell-nginx2  # Shell Nginx (projet 2)
 
 # Nettoyer complètement l'environnement
 make clean
-\```
+```
 
 ## Accès aux Applications
 
@@ -136,7 +136,7 @@ make clean
 
 Modifier le fichier `www/projet2/index.php` avec vos paramètres de connexion :
 
-\```php
+```php
 $serverName = "your_server_name";
 $connectionOptions = array(
     "Database" => "your_database",
@@ -144,14 +144,14 @@ $connectionOptions = array(
     "PWD" => "your_password",
     "TrustServerCertificate" => true
 );
-\```
+```
 
 ## Maintenance
 
 Pour une réinitialisation complète de l'environnement :
-\```bash
+```bash
 make clean
 make up
-\```
+```
 
 Cette commande supprimera tous les conteneurs, images et volumes associés avant de reconstruire l'environnement.
