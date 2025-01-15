@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Configuration pour PHP 5.6
+  php56:
+    build:
+      context: .
+      dockerfile: php56.Dockerfile
+    container_name: php56
+    volumes:
+      - ./www/projet1:/var/www/projet1
+    networks:
+      - app_network
+
+  nginx1:
+    image: nginx:latest
+    container_name: nginx1
+    volumes:
+      - ./www/projet1:/var/www/projet1
+      - ./nginx/nginx-projet1.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8090:80"
+    depends_on:
+      - php56
+    networks:
+      - app_network
+
+  # Configuration pour PHP 8.1
+  php81:
+    build:
+      context: .
+      dockerfile: php81.Dockerfile
+    container_name: php81
+    volumes:
+      - ./www/projet2:/var/www/projet2
+    networks:
+      - app_network
+
+  nginx2:
+    image: nginx:latest
+    container_name: nginx2
+    volumes:
+      - ./www/projet2:/var/www/projet2
+      - ./nginx/nginx-projet2.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8091:80"
+    depends_on:
+      - php81
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
